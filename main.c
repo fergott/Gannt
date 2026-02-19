@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <string.h>
-#define MAX = 100;
+#define MAX 100;
 int main(void)
 {
     char test_value[MAX];
         printf("Welcome to the gantt generator");
-        printf("Would you like to use the test example or create your on Gantt from scratch ? (yes or no)");
+        printf("Would you like to use the test example(1) or create your on Gantt from scratch(0) ?");
         scanf("&s", &test_value)
 
 
