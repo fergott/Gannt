@@ -3,25 +3,27 @@
 #define MAX 100;
 int main(void)
 {
-    char test_value[MAX];
+    int test_value;
         printf("Welcome to the gantt generator");
         printf("Would you like to use the test example or create your on Gantt from scratch ? (yes or no)");
-        scanf("&s", &test_value);
+        scanf("&d", %test_value);
 
-        toLower(test_value);
+      //  toLower(test_value);
 
-        if (strcmp("yes", test_value)){
-            printf("yay");
-        }
-        else 
-        {
-            printf("BOoo you lame");
-        }
+      if (1 == test_value)
+    {
+        printf("yay");
+    }
+    else
+    {
+        printf("BOoo you lame");
+    }
+
 
 }
 
 
-
+/*
 
 void toLower(char string[MAX_LEN])
 {
@@ -30,6 +32,7 @@ void toLower(char string[MAX_LEN])
         string[i] = tolower((unsigned char) string[i]);
     }
 }
+*/
     /*
     to do:
     TEST gantt chart
