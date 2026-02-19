@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#define MAX = 100;
+#define MAX 100;
 int main(void)
 {
     char test_value[MAX];
