@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 4.1)
+project(assignment2eleyehor)
+
+set(CMAKE_CXX_STANDARD 14)
+
+add_executable(assignment2eleyehor
+        main.c
+        README.md
+        TestTable.c
+        TestTable.h)
