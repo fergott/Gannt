@@ -13,7 +13,7 @@ void PrintTable()
     {
         printf("%s |", month[i]);
     }
-
+    
     printf("\n|--------------------------------------------------------------------------------------------------|\n");
     // print task[i] | print XXX for int month struct.start_month to struct.end_month ???
 
