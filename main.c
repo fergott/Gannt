@@ -24,7 +24,7 @@ int main(void)
     char input[MAX_LEN];
 
         printf("Welcome to the gantt generator");
-        printf("Would you like to use the test example or create your on Gantt from scratch ? (yes or no)");
+        printf("Would you like to use the test example or create your on Gantt from scratch ? (yes or no) \n");
         scanf("%s", test_value);
 
         toLower(test_value);
@@ -32,7 +32,7 @@ int main(void)
       if (strcmp(test_value, "yes") == 0)
          {
         PrintTable();
-          // todo print out the test table
+          //to do print out the test table
 
          }
       else
@@ -42,7 +42,7 @@ int main(void)
 
 
     printf("\n If you wish to edit the Gantt please type 'edit' / If you wish to run a test, type 'test' or to exit,"
-           " type 'quit' and then press enter to execute your option.");
+           " type 'quit' and then press enter to execute your option.\n");
 
     scanf("%s", input);
     toLower(input);
@@ -56,7 +56,7 @@ int main(void)
         }
     else if (strcmp(input, "test") == 0)
         {
-            // somehow print the test table
+            // call PrintTable with test values
         }
 
     return 0;
