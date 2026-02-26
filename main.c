@@ -15,22 +15,15 @@ to do:
 #include <stdlib.h>
 #include "TestTable.h"
 #define MAX_LEN 100
-
+#define MAX_TASKS 10
 void toLower(char string[MAX_LEN]);
+void readInputs(inputs* CoolInputs);
 
-struct InputsStr
-{
-    int taskAmount;
-    char taskName[10][MAX_LEN];
-    int startMonth;
-    int endMonth;
-    int dependencies;
-};
 
 
 int main(void)
 {
-    struct InputsStr inputs;
+    inputs inputs;
     char test_value[MAX_LEN];
     char commands[MAX_LEN];
 
@@ -48,28 +41,11 @@ int main(void)
          }
       else
         {
-          printf("how many tasks would you like to add?(1-10");
-             scanf("%d", &inputs.taskAmount);
-            if (inputs.taskAmount <= 0 || inputs.taskAmount > 10)
-            {
-                printf("task Amount must be between 1 and 10 \n");
-                printf("how many tasks would you like to add?(1-10");
-                scanf("%d", &inputs.taskAmount);
 
-                for (int i = 0; i < inputs.taskAmount; i++)
-                {
-                    printf("Enter the task %d name \n", i+1);
-                    scanf("%s", inputs.taskName[i]);
-                    printf("Enter the start month \n");
-                    scanf("%d", &inputs.startMonth);
-                    printf("Enter the end month \n");
-                    scanf("%d", &inputs.endMonth);
-                }
-            }
+          readInputs(&inputs);
+          }
 
-        }
-
-
+PrintTable(&inputs);
     printf("\n If you wish to edit the Gantt please type 'edit' / If you wish to run a test, type 'test' or to exit,"
            " type 'quit' and then press enter to execute your option.\n");
 
