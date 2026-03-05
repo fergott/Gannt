@@ -85,6 +85,43 @@ PrintTable(&inputs);
             printf("Event_day              |         |          |           |          |           |          |            |          |           |         |          |    XXX   |   9  6           |");
             printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         }
+        else
+        {
+            printf("how many tasks would you like to add?(1-10");
+            scanf("%d", &inputs.taskAmount);
+            if (inputs.taskAmount <= 0 || inputs.taskAmount > 10)
+            {
+                printf("task Amount must be between 1 and 10 \n");
+                printf("how many tasks would you like to add?(1-10");
+                scanf("%d", &inputs.taskAmount);
+
+                for (int i = 0; i < inputs.taskAmount; i++)
+                {
+                    printf("Enter the task %d name (USE UNDERSCORES!)\n", i+1);
+                    scanf("%s", inputs.taskName[i]);
+                    printf("Enter the start month \n");
+                    scanf("%d", &inputs.startMonth);
+                    printf("Enter the end month \n");
+                    scanf("%d", &inputs.endMonth);
+                }
+            }
+
+        }
+
+
+    printf("\n If you wish to edit the Gantt please type 'edit' / If you wish to run a test, type 'test' or to exit,"
+           " type 'quit' and then press enter to execute your option.\n");
+
+    scanf("%s", commands);
+    toLower(commands);
+    if (strcmp(commands, "quit") == 0)
+    {
+        return 0;
+    }
+    else if (strcmp(commands, "edit") == 0)
+    {
+        printf("Please enter the task to which you want to change exactly");
+        scanf("%99s", target);
 
         int found = 0;
 
