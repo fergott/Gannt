@@ -12,7 +12,7 @@ typedef struct inputs
     char taskName[10][MAX_LEN];
     int startMonth[MAX_TASKS];
     int endMonth[MAX_TASKS];
-   // int dependencies[MAX_TASKS];
+    int dependencies[MAX_TASKS];
 } inputs;
 
 void PrintTable();

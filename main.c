@@ -18,7 +18,14 @@ to do:
 #define MAX_TASKS 10
 void toLower(char string[MAX_LEN]);
 void readInputs(inputs* CoolInputs);
-
+char input[MAX_LEN];
+char target[MAX_LEN];
+char test_value[MAX_LEN];
+int newstart;
+int newEnd;
+int startmonth[12];
+int endmonth[12];
+int dependency;
 
 
 int main(void)
@@ -28,7 +35,7 @@ int main(void)
     char commands[MAX_LEN];
 
         printf("Welcome to the gantt generator");
-        printf("Would you like to use the test example or create your on Gantt from scratch ? (yes or no)");
+        printf("Would you like to use the test example or create your on Gantt from scratch ? (yes or no) \n");
         scanf("%s", test_value);
 
         toLower(test_value);
@@ -37,7 +44,7 @@ int main(void)
          {
         PrintTable();
           // todo print out the test table
-        
+
          }
       else
         {
@@ -47,7 +54,7 @@ int main(void)
 
 PrintTable(&inputs);
     printf("\n If you wish to edit the Gantt please type 'edit' / If you wish to run a test, type 'test' or to exit,"
-           " type 'quit' and then press enter to execute your option.");
+           " type 'quit' and then press enter to execute your option.\n");
 
     scanf("%s", input);
     toLower(input);
@@ -120,18 +127,19 @@ PrintTable(&inputs);
     }
     else if (strcmp(commands, "edit") == 0)
     {
+        int k;
         printf("Please enter the task to which you want to change exactly");
         scanf("%99s", target);
 
         int found = 0;
 
-        for (int i = 0; i < taskAmount; i++)
+        for (int i = 0; i < inputs.taskAmount; i++)
         {
-            if (strcmp(taskname[i], target) == 0)
+            if (strcmp(inputs.taskName[i], target) == 0)
             {
                 found = 1;
                 printf("Please enter the new task name or write its old one");
-                scanf("%9s", taskname[i]);
+                scanf("%9s", inputs.taskName[i]);
 
                 printf("Start month (1-12): ");
 
@@ -159,7 +167,7 @@ PrintTable(&inputs);
                 for (int j = 0; j < k; j++) {
                     printf("Enter dependency %d: ", j + 1);
                     scanf("%d", &dependency);
-                    dependencies[i][j] = dependency;
+                    inputs.dependencies[i][j] = dependency;
 
                 }
                 break;
@@ -243,7 +251,6 @@ PrintTable(&inputs);
     );
     return 0;
 }
-
 
 
 

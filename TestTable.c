@@ -17,6 +17,10 @@ void PrintTable(inputs* CoolerInputs)
     }
     for (int i = 0; i<CoolerInputs->taskAmount; i++) {
         printf("| %s \n", CoolerInputs->taskName[i-1]);
+        if (i < CoolerInputs->startMonth && i <= CoolerInputs->endMonth) {
+            printf("|XXX");
+        }
+        else printf("|    |");
     }
 
 
