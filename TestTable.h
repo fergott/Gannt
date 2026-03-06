@@ -4,6 +4,8 @@
 #define MAX_LEN 100
 #define MAX_TASKS 10
 #define MAX_DEPS 10
+
+//the struct is defined here so that it is universally the same
 typedef struct
 {
     int taskAmount;

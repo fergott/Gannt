@@ -35,9 +35,9 @@ int main(void)
         clearScreen();
         PrintTable(&data);
 
-        printf("Type 'edit' to edit the Gantt, 'test' to run dependency test, or 'quit to exit: ");
+        printf("Type 'edit' to edit the Gantt, 'test' to run dependency test, or 'quit' to exit: ");
         scanf("%99s", choice);
-        toLower(choice);
+        toLower(choice); //to include a wider range of answers
 
         if (strcmp(choice, "quit") == 0) {
             break;
