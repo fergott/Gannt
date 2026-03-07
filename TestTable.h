@@ -9,7 +9,7 @@
 typedef struct
 {
     int taskAmount;
-    char taskName[MAX_LEN][MAX_TASKS];
+    char taskName[MAX_Tasks][MAX_LEN];
     int startMonth[MAX_TASKS];
     int endMonth[MAX_TASKS];
     int dependencies[MAX_TASKS][MAX_TASKS];

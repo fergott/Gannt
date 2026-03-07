@@ -20,7 +20,7 @@ int main(void)
     inputs data;
     char choice[MAX_LEN];
 
-    printf("Welcome to the gantt generator");
+    printf("Welcome to the gantt generator\n");
     printf("Would you like to use the test example or create your on Gantt from scratch ? (yes or no) \n");
     scanf("%99s", choice);
     toLower(choice);
