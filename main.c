@@ -20,7 +20,7 @@ int main(void)
     }
     else{
 
-
+        readInputs(&data);
 
     }
     while (1) {
