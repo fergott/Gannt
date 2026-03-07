@@ -114,6 +114,49 @@ void readInputs(inputs *data)
     }
 */
 }
+// check for dependencies
+int depCheck(inputs *data, int task, int visited[], int stack[])
+{
+    if (stack[task])
+    {
+        return 1;
+    }
+    if (visited[task])
+    {
+        return 0;
+    }
+
+    stack[task] = 1;
+    visited[task] = 1;
+
+    for (int i=0; i<data->dependencyAmount[task]; i++)
+    {
+        int dep = data->dependencies[task][i]-1;
+
+        if (dep >= 0 && dep < data->taskAmount) {
+            if (depCheck(data, dep, &task, stack)) {
+                return 1;
+            }
+        }
+
+    }
+    stack[task] = 0;
+    return 0;
+}
+//check for dependancies
+int circDependency(inputs *data)
+{
+    int visited[MAX_TASKS]={0};
+    int stack[MAX_TASKS]={0};
+
+    for (int i=0;i < data->taskAmount; i++) {
+        if (depCheck(data, i, visited, stack)) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 
 
 // function to turn the input into lowercase to make program less case sensitive
