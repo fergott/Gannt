@@ -17,10 +17,10 @@ void PrintTable(inputs* CoolerInputs)
     }
     for (int i = 0; i<CoolerInputs->taskAmount; i++) {
         printf("| %s \n", CoolerInputs->taskName[i-1]);
-        if (i < CoolerInputs->startMonth && i <= CoolerInputs->endMonth) {
-            printf("|XXX");
-        }
-        else printf("|    |");
+       // if (i <= CoolerInputs->startMonth && i >= CoolerInputs->endMonth) {
+         ////   printf("|XXX");
+     //   }
+       // else printf("|    |");
     }
 
 
@@ -49,16 +49,58 @@ void readInputs(inputs* CoolInputs)
         scanf("%d", &CoolInputs->startMonth[i]);
         printf("Enter the end month \n");
         scanf("%d", &CoolInputs->endMonth[i]);
+        printf("Enter how many dependancies does this task have\n");
+        scanf("%d", &CoolInputs->dependencyAmount[i]);
+        for (int j = 0; j < CoolInputs->dependencyAmount[i]; j++)
+        {
+            printf("Enter the dependancy %d for the task %d \n", i+1, i+1);
+            scanf("%d", &CoolInputs->dependencies[i][j]);
+        }
     }
-/*
-    for (int i = 0; i < CoolInputs->taskAmount; i++) {
-        printf("%s", CoolInputs->taskName[i]);
-        printf("start month: %d \n", CoolInputs->startMonth[i]);
-        printf("end month: %d \n", CoolInputs->endMonth[i]);
-        //       printf("dependencies: %d", inputs.dependencies);
-    }
-*/
 }
+// check for dependencies
+int depCheck(inputs *data, int task, int visited[], int stack[])
+{
+    if (stack[task])
+    {
+        return 1;
+    }
+    if (visited[task])
+    {
+        return 0;
+    }
+
+    stack[task] = 1;
+    visited[task] = 1;
+
+    for (int i=0; i<data->dependencyAmount[task]; i++)
+    {
+        int dep = data->dependencies[task][i]-1;
+
+        if (dep >= 0 && dep < data->taskAmount) {
+            if (depCheck(data, dep, &task, stack)) {
+                return 1;
+            }
+        }
+
+    }
+    stack[task] = 0;
+    return 0;
+}
+//check for dependancies
+int circDependency(inputs *data)
+{
+    int visited[MAX_TASKS]={0};
+    int stack[MAX_TASKS]={0};
+
+    for (int i=0;i < data->taskAmount; i++) {
+        if (depCheck(data, i, visited, stack)) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 
 
 // function to turn the input into lowercase to make program less case sensitive

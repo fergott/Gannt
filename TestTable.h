@@ -12,11 +12,14 @@ typedef struct inputs
     char taskName[10][MAX_LEN];
     int startMonth[MAX_TASKS];
     int endMonth[MAX_TASKS];
-    int dependencies[MAX_TASKS];
+    int dependencies[MAX_TASKS][MAX_TASKS];
+    int dependencyAmount[MAX_TASKS];
 } inputs;
 
-void PrintTable();
-void readInputs();
+void PrintTable(inputs* CoolerInputs);
+int depCheck(inputs *data, int task, int visited[], int stack[]);
+void readInputs(inputs* CoolInputs);
+int circDependency(inputs *data) ;
 void toLower(char string[MAX_LEN]);
 
 
