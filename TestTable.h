@@ -9,11 +9,11 @@
 typedef struct
 {
     int taskAmount;
-    char taskName[MAX_TASKS][MAX_LEN];
+    char taskName[MAX_LEN][MAX_TASKS];
     int startMonth[MAX_TASKS];
     int endMonth[MAX_TASKS];
     int dependencies[MAX_TASKS][MAX_TASKS];
-    int dependencyAmount[MAX_TASKS];
+    int depCount[MAX_TASKS];
 } inputs;
 
 void PrintTable(inputs* CoolerInputs);

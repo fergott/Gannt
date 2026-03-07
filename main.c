@@ -29,9 +29,17 @@ int main(void)
         loadTestData(&data);
     }
     else{
+
         readInputs(&data);
+
+
     }
     while (1) {
+        if (circDependency(&data))
+        {
+            printf("ERROR: Circular dependency detected!!!!!!!!!!!!!!!!!\n");
+            return 1;
+        }
         clearScreen();
         PrintTable(&data);
 
@@ -46,7 +54,11 @@ int main(void)
             editTask(&data);
         }
         else if (strcmp(choice, "test") == 0) {
-            // i think dependency test will go here
+            if (circDependency(&data))
+                printf("Circular dependency detected!\n");
+            else
+                printf("No circular dependencies.\n");
+
         }
         else {
             printf("Invalid command.\n");

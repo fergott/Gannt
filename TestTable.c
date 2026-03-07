@@ -105,14 +105,7 @@ void readInputs(inputs *data)
             scanf("%d", &data->dependencies[i][j]);
         }
     }
-/*   not in use anymore
-    for (int i = 0; i < data->taskAmount; i++) {
-        printf("%s", data->taskName[i]);
-        printf("start month: %d \n", data->startMonth[i]);
-        printf("end month: %d \n", data->endMonth[i]);
-        //       printf("dependencies: %d", inputs.dependencies);
-    }
-*/
+
 }
 // check for dependencies
 int depCheck(inputs *data, int task, int visited[], int stack[])
@@ -129,12 +122,12 @@ int depCheck(inputs *data, int task, int visited[], int stack[])
     stack[task] = 1;
     visited[task] = 1;
 
-    for (int i=0; i<data->dependencyAmount[task]; i++)
+    for (int i=0; i<data->depCount[task]; i++)
     {
         int dep = data->dependencies[task][i]-1;
 
         if (dep >= 0 && dep < data->taskAmount) {
-            if (depCheck(data, dep, &task, stack)) {
+            if (depCheck(data, dep, visited, stack)) {
                 return 1;
             }
         }
