@@ -187,71 +187,100 @@ void toLower(char string[MAX_LEN])
 }
 
 // this allows us to print the test gantt chart with preloaded data
-void loadTestData(inputs *data) {
+void loadTestData(inputs *data)
+{
     data->taskAmount = 10;
 
-    strcpy(data->taskName[0], "Book_Venue");
-    data->startMonth[0] = 1;
-    data->endMonth[0] = 2;
-    data->depCount[0] = 0;
+    // Task Names
+    strcpy(data->taskName[BOOK_VENUE - 1], "Book Venue");
+    strcpy(data->taskName[HIRE_PERFORMERS - 1], "Hire Performers");
+    strcpy(data->taskName[ORDER_SOUND - 1], "Order Sound & Lighting");
+    strcpy(data->taskName[MARKETING - 1], "Marketing");
+    strcpy(data->taskName[TICKET_SALES - 1], "Ticket Sales");
+    strcpy(data->taskName[HIRE_SECURITY - 1], "Hire Security");
+    strcpy(data->taskName[EQUIPMENT_DELIVERY - 1], "Equipment Delivery");
+    strcpy(data->taskName[SETUP_STAGE - 1], "Setup Stage");
+    strcpy(data->taskName[REHEARSAL - 1], "Rehearsal");
+    strcpy(data->taskName[EVENT_DAY - 1], "Event Day");
 
-    strcpy(data->taskName[1], "Hire_Performers");
-    data->startMonth[1] = 2;
-    data->endMonth[1] = 5;
-    data->depCount[1] = 1;
-    data->dependencies[1][0] = 1;
+    // Initialize dependency counts
+    for (int i = 0; i < MAX_TASKS; i++)
+    {
+        data->depCount[i] = 0;
+    }
 
-    strcpy(data->taskName[2], "Order_sound_lighting");
-    data->startMonth[2] = 3;
-    data->endMonth[2] = 5;
-    data->depCount[2] = 1;
-    data->dependencies[2][0] = 1;
+    // Dependencies
 
-    strcpy(data->taskName[3], "Marketing");
-    data->startMonth[3] = 5;
-    data->endMonth[3] = 8;
-    data->depCount[3] = 2;
-    data->dependencies[3][0] = 1;
-    data->dependencies[3][1] = 2;
+    // Hire Performers depends on Book Venue
+    data->dependencies[HIRE_PERFORMERS - 1][0] = BOOK_VENUE;
+    data->depCount[HIRE_PERFORMERS - 1] = 1;
+    data->startMonth[HIRE_PERFORMERS - 1] = 2;
+    data->endMonth[HIRE_PERFORMERS - 1] = 4;
 
-    strcpy(data->taskName[4], "Ticket_sales");
-    data->startMonth[4] = 8;
-    data->endMonth[4] = 9;
-    data->depCount[4] = 1;
-    data->dependencies[4][0] = 4;
 
-    strcpy(data->taskName[5], "Hire_security");
-    data->startMonth[5] = 10;
-    data->endMonth[5] = 11;
-    data->depCount[5] = 1;
-    data->dependencies[5][0] = 5;
+    // Order Sound depends on Book Venue and Hire Performers
+    data->dependencies[ORDER_SOUND - 1][0] = BOOK_VENUE;
+    data->dependencies[ORDER_SOUND - 1][1] = HIRE_PERFORMERS;
 
-    strcpy(data->taskName[6], "Equipment_delivery");
-    data->startMonth[6] = 8;
-    data->endMonth[6] = 10;
-    data->depCount[6] = 1;
-    data->dependencies[6][0] = 3;
+    data->depCount[ORDER_SOUND - 1] = 2;
 
-    strcpy(data->taskName[7], "Setup_stage");
-    data->startMonth[7] = 9;
-    data->endMonth[7] = 10;
-    data->depCount[7] = 1;
-    data->dependencies[7][0] = 7;
+    // Marketing depends on Book Venue
+    data->dependencies[MARKETING - 1][0] = BOOK_VENUE;
+    data->depCount[MARKETING - 1] = 1;
 
-    strcpy(data->taskName[8], "Rehearsal");
-    data->startMonth[8] = 11;
-    data->endMonth[8] = 11;
-    data->depCount[8] = 2;
-    data->dependencies[8][0] = 2;
-    data->dependencies[8][1] = 7;
+    // Ticket Sales depends on Marketing
+    data->dependencies[TICKET_SALES - 1][0] = MARKETING;
+    data->depCount[TICKET_SALES - 1] = 1;
 
-    strcpy(data->taskName[9], "Event_day");
-    data->startMonth[9] = 12;
-    data->endMonth[9] = 12;
-    data->depCount[9] = 2;
-    data->dependencies[9][0] = 9;
-    data->dependencies[9][1] = 6;
+    // Hire Security depends on Book Venue
+    data->dependencies[HIRE_SECURITY - 1][0] = BOOK_VENUE;
+    data->depCount[HIRE_SECURITY - 1] = 1;
+
+    // Equipment Delivery depends on Order Sound
+    data->dependencies[EQUIPMENT_DELIVERY - 1][0] = ORDER_SOUND;
+    data->depCount[EQUIPMENT_DELIVERY - 1] = 1;
+
+    // Setup Stage depends on Equipment Delivery
+    data->dependencies[SETUP_STAGE - 1][0] = EQUIPMENT_DELIVERY;
+    data->depCount[SETUP_STAGE - 1] = 1;
+
+    // Rehearsal depends on Setup Stage
+    data->dependencies[REHEARSAL - 1][0] = SETUP_STAGE;
+    data->depCount[REHEARSAL - 1] = 1;
+
+    // Event Day depends on Rehearsal
+    data->dependencies[EVENT_DAY - 1][0] = REHEARSAL;
+    data->depCount[EVENT_DAY - 1] = 1;
+
+    //start and end month
+    data->startMonth[BOOK_VENUE - 1] = 1;
+    data->endMonth[BOOK_VENUE - 1] = 2;
+
+    data->startMonth[HIRE_PERFORMERS - 1] = 2;
+    data->endMonth[HIRE_PERFORMERS - 1] = 4;
+
+    data->startMonth[ORDER_SOUND - 1] = 3;
+    data->endMonth[ORDER_SOUND - 1] = 4;
+
+    data->startMonth[MARKETING - 1] = 4;
+    data->endMonth[MARKETING - 1] = 8;
+
+    data->startMonth[TICKET_SALES - 1] = 4;
+    data->endMonth[TICKET_SALES - 1] = 10;
+
+    data->startMonth[HIRE_SECURITY - 1] = 8;
+    data->endMonth[HIRE_SECURITY - 1] = 9;
+
+    data->startMonth[EQUIPMENT_DELIVERY - 1] = 4;
+    data->endMonth[EQUIPMENT_DELIVERY - 1] = 4;
+
+    data->startMonth[SETUP_STAGE - 1] = 10;
+    data->endMonth[SETUP_STAGE - 1] = 11;
+    data->startMonth[REHEARSAL - 1] = 11;
+    data->endMonth[REHEARSAL - 1] = 12;
+
 }
+
 
 
 //allows user to edit tasks already added to the struct

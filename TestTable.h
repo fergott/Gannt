@@ -15,6 +15,19 @@ typedef struct
     int dependencies[MAX_TASKS][MAX_TASKS];
     int depCount[MAX_TASKS];
 } inputs;
+typedef enum
+{
+    BOOK_VENUE=1,
+    HIRE_PERFORMERS,
+    ORDER_SOUND,
+    MARKETING,
+    TICKET_SALES,
+    HIRE_SECURITY,
+    EQUIPMENT_DELIVERY,
+    SETUP_STAGE,
+    REHEARSAL,
+    EVENT_DAY
+} TaskEnum;
 
 void PrintTable(inputs* CoolerInputs);
 int depCheck(inputs *data, int task, int visited[], int stack[]);

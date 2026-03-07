@@ -33,7 +33,7 @@ int main(void)
         toLower(choice); //to include a wider range of answers
 
         if (strcmp(choice, "quit") == 0) {
-            break;
+            return 0;
         }
         else if (strcmp(choice, "edit") == 0) {
             editTask(&data);
