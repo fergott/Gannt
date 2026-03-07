@@ -13,7 +13,7 @@ typedef struct
     int startMonth[MAX_TASKS];
     int endMonth[MAX_TASKS];
     int dependencies[MAX_TASKS][MAX_TASKS];
-    int dependencyAmount[MAX_TASKS];
+    int depCount[MAX_TASKS];
 } inputs;
 
 void PrintTable(inputs* CoolerInputs);
