@@ -1,13 +1,3 @@
- /*
-to do:
-   TEST gantt chart
-   Initialize the struct Ele
-   get the inputs  Yehor
-
-   give the option to edit
-   pick and check the circular dependencies
-
-   */
 
 
 #include <stdio.h>
@@ -30,16 +20,11 @@ int main(void)
     }
     else{
 
-        readInputs(&data);
 
 
     }
     while (1) {
-        if (circDependency(&data))
-        {
-            printf("ERROR: Circular dependency detected!!!!!!!!!!!!!!!!!\n");
-            return 1;
-        }
+
         clearScreen();
         PrintTable(&data);
 
@@ -55,7 +40,7 @@ int main(void)
         }
         else if (strcmp(choice, "test") == 0) {
             if (circDependency(&data))
-                printf("Circular dependency detected!\n");
+                printf("Circular dependency detected!!!!!!!!!!!\n");
             else
                 printf("No circular dependencies.\n");
 

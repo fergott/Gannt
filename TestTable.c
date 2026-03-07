@@ -103,6 +103,11 @@ void readInputs(inputs *data)
         for (int j=0; j < data->depCount[i]; j++) {
             printf("Enter dependecy %d(Task number): ", j+1);
             scanf("%d", &data->dependencies[i][j]);
+
+            while (data->dependencies[i][j] < 1 || data->dependencies[i][j] > data->taskAmount) {
+                printf("Invalid task number. Enter again: ");
+                scanf("%d", &data->dependencies[i][j]);
+            }
         }
     }
 
