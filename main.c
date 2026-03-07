@@ -14,202 +14,48 @@ to do:
 #include <string.h>
 #include <stdlib.h>
 #include "TestTable.h"
-#define MAX_LEN 100
-#define MAX_TASKS 10
-void toLower(char string[MAX_LEN]);
-void readInputs(inputs* CoolInputs);
-char input[MAX_LEN];
-char target[MAX_LEN];
-char test_value[MAX_LEN];
-int newstart;
-int newEnd;
-int startmonth[12];
-int endmonth[12];
-int dependency;
-
 
 int main(void)
 {
-    inputs inputs;
-    char test_value[MAX_LEN];
-    char commands[MAX_LEN];
+    inputs data;
+    char choice[MAX_LEN];
 
-        printf("Welcome to the gantt generator");
-        printf("Would you like to use the test example or create your on Gantt from scratch ? (yes or no) \n");
-        scanf("%s", test_value);
+    printf("Welcome to the gantt generator");
+    printf("Would you like to use the test example or create your on Gantt from scratch ? (yes or no) \n");
+    scanf("%99s", choice);
+    toLower(choice);
 
-        toLower(test_value);
-
-      if (strcmp(test_value, "yes") == 0)
-         {
-       printf("--------------------------------------- M O D E L L I N G -------- O R G A N I S I N G --------- A -------- C O N C E R T --------------------------------------------------------");
-            printf("                       | January | February |   March   |   April  |    May    |   June   |    July    |  August  | September | October | November | December |   Dependencies   |");
-            printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            printf("Book_Venue             |   XXX   |    XXX   |           |          |           |          |            |          |           |         |          |          |                  |");
-            printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            printf("Hire_performers        |         |    XXX   |    XXX    |    XXX   |    XXX    |          |            |          |           |         |          |          |   1              |");
-            printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            printf("Order_sound/lighting   |         |          |    XXX    |    XXX   |    XXX    |          |            |          |           |         |          |          |   1              |");
-            printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            printf("Marketing              |         |          |           |          |    XXX    |    XXX   |     XXX    |    XXX   |           |         |          |          |   1  2           |");
-            printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            printf("Ticket_sales           |         |          |           |          |           |          |            |    XXX   |    XXX    |         |          |          |   4              |");
-            printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            printf("Hire_security          |         |          |           |          |           |          |            |          |           |   XXX   |    XXX   |          |   5              |");
-            printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            printf("Equipment_delivery     |         |          |           |          |           |          |            |    XXX   |     XXX   |   XXX   |          |          |   3              |");
-            printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            printf("Set_up_stage           |         |          |           |          |           |          |            |          |     XXX   |   XXX   |          |          |   7              |");
-            printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            printf("Rehearsal              |         |          |           |          |           |          |            |          |           |         |    XXX   |          |   2  7           |");
-            printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            printf("Event_day              |         |          |           |          |           |          |            |          |           |         |          |    XXX   |   9  6           |");
-            printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-
-          // todo print out the test table
-
-         }
-      else
-        {
-
-          readInputs(&inputs);
-          if (circDependency(&inputs))
-          {
-              printf("ERROR: Circular dependency detected!!!!!!!!!!!!!!!!!!!!!\n");
-              printf("Please restart and enter valid dependencies.\n");
-              return 1;
-          }
-          }
-
-PrintTable(&inputs);
-    printf("\n If you wish to edit the Gantt please type 'edit' / If you wish to run a test, type 'test' or to exit,"
-           " type 'quit' and then press enter to execute your option.\n");
-
-    scanf("%s", input);
-    toLower(input);
-    if (strcmp(input, "quit") == 0)
-        {
-            return 0;
-        }
-    else if (strcmp(input, "edit") == 0)
-        {
-            // somehow edit values inside the table
-        }
-    else if (strcmp(input, "test") == 0)
-        {
-            printf("--------------------------------------- M O D E L L I N G -------- O R G A N I S I N G --------- A -------- C O N C E R T --------------------------------------------------------");
-            printf("                       | January | February |   March   |   April  |    May    |   June   |    July    |  August  | September | October | November | December |   Dependencies   |");
-            printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            printf("Book_Venue             |   XXX   |    XXX   |           |          |           |          |            |          |           |         |          |          |                  |");
-            printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            printf("Hire_performers        |         |    XXX   |    XXX    |    XXX   |    XXX    |          |            |          |           |         |          |          |   1              |");
-            printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            printf("Order_sound/lighting   |         |          |    XXX    |    XXX   |    XXX    |          |            |          |           |         |          |          |   1              |");
-            printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            printf("Marketing              |         |          |           |          |    XXX    |    XXX   |     XXX    |    XXX   |           |         |          |          |   1  2           |");
-            printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            printf("Ticket_sales           |         |          |           |          |           |          |            |    XXX   |    XXX    |         |          |          |   4              |");
-            printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            printf("Hire_security          |         |          |           |          |           |          |            |          |           |   XXX   |    XXX   |          |   5              |");
-            printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            printf("Equipment_delivery     |         |          |           |          |           |          |            |    XXX   |     XXX   |   XXX   |          |          |   3              |");
-            printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            printf("Set_up_stage           |         |          |           |          |           |          |            |          |     XXX   |   XXX   |          |          |   7              |");
-            printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            printf("Rehearsal              |         |          |           |          |           |          |            |          |           |         |    XXX   |          |   2  7           |");
-            printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            printf("Event_day              |         |          |           |          |           |          |            |          |           |         |          |    XXX   |   9  6           |");
-            printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-        }
-        else
-        {
-            printf("how many tasks would you like to add?(1-10");
-            scanf("%d", &inputs.taskAmount);
-            if (inputs.taskAmount <= 0 || inputs.taskAmount > 10)
-            {
-                printf("task Amount must be between 1 and 10 \n");
-                printf("how many tasks would you like to add?(1-10");
-                scanf("%d", &inputs.taskAmount);
-
-                for (int i = 0; i < inputs.taskAmount; i++)
-                {
-                    printf("Enter the task %d name (USE UNDERSCORES!)\n", i+1);
-                    scanf("%s", inputs.taskName[i]);
-                    printf("Enter the start month \n");
-                    scanf("%d", &inputs.startMonth);
-                    printf("Enter the end month \n");
-                    scanf("%d", &inputs.endMonth);
-                }
-            }
-
-        }
-
-
-    printf("\n If you wish to edit the Gantt please type 'edit' / If you wish to run a test, type 'test' or to exit,"
-           " type 'quit' and then press enter to execute your option.\n");
-
-    scanf("%s", commands);
-    toLower(commands);
-    if (strcmp(commands, "quit") == 0)
-    {
-        return 0;
+    if (strcmp(choice, "yes") == 0){
+        loadTestData(&data);
     }
-    else if (strcmp(commands, "edit") == 0)
-    {
-        int k;
-        printf("Please enter the task to which you want to change exactly");
-        scanf("%99s", target);
+    else{
+        readInputs(&data);
+    }
+    while (1) {
+        clearScreen();
+        PrintTable(&data);
 
-        int found = 0;
+        printf("Type 'edit' to edit the Gantt, 'test' to run dependency test, or 'quit' to exit: ");
+        scanf("%99s", choice);
+        toLower(choice); //to include a wider range of answers
 
-        for (int i = 0; i < inputs.taskAmount; i++)
-        {
-            if (strcmp(inputs.taskName[i], target) == 0)
-            {
-                found = 1;
-                printf("Please enter the new task name or write its old one");
-                scanf("%9s", inputs.taskName[i]);
-
-                printf("Start month (1-12): ");
-
-                scanf("%d", &newstart);
-                if (newstart < 1 || newstart > 12) {
-                    printf("Out of range");
-                    break;
-                }
-                startmonth[i] = newstart;
-
-
-                printf("End month (1-12): ");
-                scanf("%d", &newEnd);
-                if (newEnd < 1 || newEnd < newstart || newEnd > 12) {
-                    printf("Out of range");
-                    break;
-                }
-                endmonth[i] = newEnd;
-
-
-                printf("Enter how many dependencies this task has: ");
-                scanf("%d", &k);
-                if (k < 0) k = 0;
-                if (k > MAX_TASKS) k = MAX_TASKS;
-                for (int j = 0; j < k; j++) {
-                    printf("Enter dependency %d: ", j + 1);
-                    scanf("%d", &dependency);
-                    inputs.dependencies[i][j] = dependency;
-
-                }
-                break;
-            }
-            if (!found) {
-                printf("Task doesn't exist\n");
-            }
+        if (strcmp(choice, "quit") == 0) {
+            break;
+        }
+        else if (strcmp(choice, "edit") == 0) {
+            editTask(&data);
+        }
+        else if (strcmp(choice, "test") == 0) {
+            // i think dependency test will go here
+        }
+        else {
+            printf("Invalid command.\n");
+            printf("Press Enter to continue...");
+            getchar();
+            getchar();
         }
     }
-    else if (strcmp(commands, "test") == 0)
-    {
-        // call PrintTable with test values
-    }
+
 
 
     printf(
