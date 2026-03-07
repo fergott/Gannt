@@ -24,6 +24,6 @@ void toLower(char string[MAX_LEN]);
 void loadTestData(inputs *data);
 void editTask(inputs *data);
 void clearScreen(void);
-
+void printDependencies(inputs *data, int task, int visited[]);
 
 #endif //ASSIGNMENT2ELEYEHOR_TESTTABLE_H

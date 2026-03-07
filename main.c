@@ -38,12 +38,20 @@ int main(void)
         else if (strcmp(choice, "edit") == 0) {
             editTask(&data);
         }
-        else if (strcmp(choice, "test") == 0) {
+        else if (strcmp(choice, "test") == 0)
+        {
+            int visited[MAX_TASKS] = {0};
+
+            for (int i = 0; i < data.taskAmount; i++)
+            {
+                printDependencies(&data, i, visited);
+                printf("\n");
+            }
+
             if (circDependency(&data))
-                printf("Circular dependency detected!!!!!!!!!!!\n");
+                printf("!!! Circular Dependency Found !!!\n");
             else
                 printf("No circular dependencies.\n");
-
         }
         else {
             printf("Invalid command.\n");

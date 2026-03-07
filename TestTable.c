@@ -117,6 +117,7 @@ int depCheck(inputs *data, int task, int visited[], int stack[])
 {
     if (stack[task])
     {
+
         return 1;
     }
     if (visited[task])
@@ -141,7 +142,7 @@ int depCheck(inputs *data, int task, int visited[], int stack[])
     stack[task] = 0;
     return 0;
 }
-//check for dependancies
+//check for dependancies by calling depCheck
 int circDependency(inputs *data)
 {
     int visited[MAX_TASKS]={0};
@@ -154,8 +155,27 @@ int circDependency(inputs *data)
     }
     return 0;
 }
+//function to turn dependency path by printing dependencies until visited[task]
+void printDependencies(inputs *data, int task, int visited[])
+{
+    if (visited[task])
+        return;
 
+    visited[task] = 1;
 
+    printf("%d", task + 1);
+
+    for (int i = 0; i < data->depCount[task]; i++)
+    {
+        int dep = data->dependencies[task][i] - 1;
+
+        if (dep >= 0 && dep < data->taskAmount)
+        {
+            printf(" -> %d", dep + 1);
+            printDependencies(data, dep, visited);
+        }
+    }
+}
 
 // function to turn the input into lowercase to make program less case sensitive
 void toLower(char string[MAX_LEN])
