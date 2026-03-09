@@ -112,26 +112,30 @@ void readInputs(inputs *data)
     }
 
 }
-// check for dependencies
+// check for dependencies by using DFS
 int depCheck(inputs *data, int task, int visited[], int stack[])
 {
+    //if task have already been explored it exits the loop
     if (stack[task])
     {
-
         return 1;
     }
+    //skips already explored notes
     if (visited[task])
     {
         return 0;
     }
-
+    //marks the tasks that are now being explored
+//tracks what already been explored
     stack[task] = 1;
+    // tracks tasks currently in the recursion path
     visited[task] = 1;
-
+//loop through dependencies
     for (int i=0; i<data->depCount[task]; i++)
     {
+        //-1 used because user enters tasks starting at 1, but array starts at 0
         int dep = data->dependencies[task][i]-1;
-
+//explore dependency task, continues until a cycle is found and all paths are finished
         if (dep >= 0 && dep < data->taskAmount) {
             if (depCheck(data, dep, visited, stack)) {
                 return 1;
@@ -139,15 +143,17 @@ int depCheck(inputs *data, int task, int visited[], int stack[])
         }
 
     }
+    //remove from recursion stack and return 0
     stack[task] = 0;
     return 0;
 }
-//check for dependancies by calling depCheck
+//check for dependencies by calling depCheck
 int circDependency(inputs *data)
 {
     int visited[MAX_TASKS]={0};
     int stack[MAX_TASKS]={0};
-
+// starts DFS from each task and follows its dependencies, if encounters
+// a task that already in the stack- a cycle exits
     for (int i=0;i < data->taskAmount; i++) {
         if (depCheck(data, i, visited, stack)) {
             return 1;
@@ -191,7 +197,7 @@ void loadTestData(inputs *data)
 {
     data->taskAmount = 10;
 
-    // Task Names
+    // Task Names copied from the enum
     strcpy(data->taskName[BOOK_VENUE - 1], "Book Venue");
     strcpy(data->taskName[HIRE_PERFORMERS - 1], "Hire Performers");
     strcpy(data->taskName[ORDER_SOUND - 1], "Order Sound & Lighting");
@@ -248,7 +254,11 @@ void loadTestData(inputs *data)
     data->dependencies[REHEARSAL - 1][0] = SETUP_STAGE;
     data->depCount[REHEARSAL - 1] = 1;
 
-    // Event Day depends on Rehearsal
+    // Event Day depends on Rehearsaldata->startMonth[BOOK_VENUE - 1] = 1;
+    data->endMonth[BOOK_VENUE - 1] = 2;
+
+    data->startMonth[HIRE_PERFORMERS - 1] = 2;
+    data->endMonth[HIRE_PERFORMERS - 1] = 4;
     data->dependencies[EVENT_DAY - 1][0] = REHEARSAL;
     data->depCount[EVENT_DAY - 1] = 1;
 
