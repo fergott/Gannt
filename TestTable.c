@@ -126,16 +126,16 @@ int depCheck(inputs *data, int task, int visited[], int stack[])
         return 0;
     }
     //marks the tasks that are now being explored
-//tracks what already been explored
+    //tracks what already been explored
     stack[task] = 1;
     // tracks tasks currently in the recursion path
     visited[task] = 1;
-//loop through dependencies
+    //loop through dependencies
     for (int i=0; i<data->depCount[task]; i++)
     {
-        //-1 used because user enters tasks starting at 1, but array starts at 0
+        //-1  because user enters tasks starting at 1, but array starts at 0
         int dep = data->dependencies[task][i]-1;
-//explore dependency task, continues until a cycle is found and all paths are finished
+        //explore dependency task, continues until a cycle is found and all paths are finished
         if (dep >= 0 && dep < data->taskAmount) {
             if (depCheck(data, dep, visited, stack)) {
                 return 1;
@@ -161,6 +161,7 @@ int circDependency(inputs *data)
     }
     return 0;
 }
+
 //function to turn dependency path by printing dependencies until visited[task]
 void printDependencies(inputs *data, int task, int visited[])
 {
@@ -198,14 +199,14 @@ void loadTestData(inputs *data)
     data->taskAmount = 10;
 
     // Task Names copied from the enum
-    strcpy(data->taskName[BOOK_VENUE - 1], "Book Venue");
-    strcpy(data->taskName[HIRE_PERFORMERS - 1], "Hire Performers");
-    strcpy(data->taskName[ORDER_SOUND - 1], "Order Sound & Lighting");
+    strcpy(data->taskName[BOOK_VENUE - 1], "Book_Venue");
+    strcpy(data->taskName[HIRE_PERFORMERS - 1], "Hire_Performers");
+    strcpy(data->taskName[ORDER_SOUND - 1], "Order_Sound");
     strcpy(data->taskName[MARKETING - 1], "Marketing");
-    strcpy(data->taskName[TICKET_SALES - 1], "Ticket Sales");
-    strcpy(data->taskName[HIRE_SECURITY - 1], "Hire Security");
-    strcpy(data->taskName[EQUIPMENT_DELIVERY - 1], "Equipment Delivery");
-    strcpy(data->taskName[SETUP_STAGE - 1], "Setup Stage");
+    strcpy(data->taskName[TICKET_SALES - 1], "Ticket_Sales");
+    strcpy(data->taskName[HIRE_SECURITY - 1], "Hire_Security");
+    strcpy(data->taskName[EQUIPMENT_DELIVERY - 1], "Equipment_Delivery");
+    strcpy(data->taskName[SETUP_STAGE - 1], "Setup_Stage");
     strcpy(data->taskName[REHEARSAL - 1], "Rehearsal");
     strcpy(data->taskName[EVENT_DAY - 1], "Event Day");
 
