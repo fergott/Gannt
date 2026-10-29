@@ -3,7 +3,7 @@ project(Gannt)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(assignment2eleyehor
+add_executable(Gannt
         main.c
         README.md
         TestTable.c
