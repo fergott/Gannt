@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 4.1)
-project(assignment2eleyehor)
+project(Gannt)
 
 set(CMAKE_CXX_STANDARD 14)
 
